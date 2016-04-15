@@ -45,7 +45,7 @@ class RoanjaCheckDomain extends Module {
            $res =  Configuration::deleteByName('ROANJA_CHECKDOMAIN_NAME');
           if (!parent::uninstall()) {
 
-           $res &= $this->deleteTable();
+           $res &= $this->dropTables();
             return (bool)$res;
           }
             
@@ -122,9 +122,15 @@ protected function renderForm()
      */
     protected function getConfigFormValues()
     {
+        $vals=$this->getValTlds();
+
         return array(
-            'ROANJA_CHECKDOMAIN_NAME' => Configuration::get('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher")
-            //'dominio_com'=>
+            'ROANJA_CHECKDOMAIN_NAME' => Configuration::get('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher"),
+            'dominio_com'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
+            'dominio_net'=>isset($vals[1]['active'])?$vals[1]['active']:1,
+            'dominio_org'=>isset($vals[2]['active'])?$vals[2]['active']:1,
+            'dominio_info'=>isset($vals[3]['active'])?$vals[3]['active']:0,
+            'dominio_edu'=>isset($vals[4]['active'])?$vals[4]['active']:0
         );
     }
 
@@ -296,7 +302,7 @@ protected function renderForm()
         /* Create the tables for the checkboxes of tlds */
         protected function createTable(){
             
-            $rescreate = (bool)Db::getInstance()->execute('
+            $res = (bool)Db::getInstance()->execute('
             CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'rj_checkdomain_tlds` (
                 `id_tld` int(10) unsigned NOT NULL AUTO_INCREMENT,
                 `name_tld` varchar(12) NOT NULL,
@@ -307,24 +313,41 @@ protected function renderForm()
              ');
 
             $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
-            'com' => 1,
-            'net' => 1,
-            'org' => 1,
-            'info' => 0,
-            'edu' => 0,
+            'name_tld' => 'com',
+            'active' => 1,
              ));
 
+            $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+            'name_tld' => 'net',
+            'active' => 1,
+             ));
+
+            $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+            'name_tld' => 'org',
+            'active' => 1,
+             ));
+
+             $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+            'name_tld' => 'edu',
+            'active' => 0,
+             ));
+
+              $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+            'name_tld' => 'info',
+            'active' => 0,
+             ));
+//echo $getMsgError();
            return $res;
         
         }
 
-        /*public function getValTlds(){
+        public function getValTlds(){
         if ($results = Db::getInstance()->ExecuteS('
             SELECT * FROM '._DB_PREFIX_.'rj_checkdomain_tlds'))
-              var_dump($results);
+             
               return $results;
 
-        }*/
+        }
 
 
 public function deleteTable(){
@@ -334,6 +357,14 @@ public function deleteTable(){
         ');
 
 } 
+
+public static function dropTables()
+    {
+        $sql = 'DROP TABLE
+            `'._DB_PREFIX_.'rj_checkdomain_tlds`';
+
+        return Db::getInstance()->execute($sql);
+    }
 
         
 
