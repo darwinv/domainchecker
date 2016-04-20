@@ -12,7 +12,10 @@ $(document).ready(function(){
         dataType:"json",
         success:function(data){
         var newreg="";
+          /*  for(i=0;i<data.length;i++){
+                alert(data[i]["title"])
 
+            } */
             newreg+="<tr><td>" + data.dominio+ "</td>";
             if(data.disponible){
               newreg+="<td><i class='fa fa-check fa-2x'> Disponible</i></td>";

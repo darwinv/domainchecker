@@ -22,7 +22,7 @@ class RoanjaCheckDomain extends Module {
                 
                 $this->displayName = $this->l('Roanja Domain Checker');
                 $this->description = $this->l('With this module, your customers will be able to check the available domains');
-                $this->ps_versions_compliancy = array('min' => '1.6.0.14', 'max' => _PS_VERSION_);
+                $this->ps_versions_compliancy = array('min' => _PS_VERSION_, 'max' => _PS_VERSION_);
 
                 $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
             }
@@ -111,9 +111,17 @@ protected function renderForm()
     {
         $form_values = $this->getConfigFormValues();
 
-        foreach (array_keys($form_values) as $key) {
+       /* foreach (array_keys($form_values) as $key) {
             Configuration::updateValue($key, Tools::getValue($key));
-        }
+        }*/
+        Configuration::updateValue('ROANJA_CHECKDOMAIN_NAME',Tools::getValue('ROANJA_CHECKDOMAIN_NAME'));
+
+        $this->updateTld("com",Tools::getValue('dominio_com_on'));
+       $this->updateTld("net",Tools::getValue('dominio_net_on'));
+        $this->updateTld("org",Tools::getValue('dominio_org_on'));
+        $this->updateTld("info",Tools::getValue('dominio_info_on'));
+        $this->updateTld("edu",Tools::getValue('dominio_edu_on'));
+        //echo $form_values["ROANJA_CHECKDOMAIN_NAME"];
     } 
 
 
@@ -126,11 +134,11 @@ protected function renderForm()
 
         return array(
             'ROANJA_CHECKDOMAIN_NAME' => Configuration::get('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher"),
-            'dominio_com'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
-            'dominio_net'=>isset($vals[1]['active'])?$vals[1]['active']:1,
-            'dominio_org'=>isset($vals[2]['active'])?$vals[2]['active']:1,
-            'dominio_info'=>isset($vals[3]['active'])?$vals[3]['active']:0,
-            'dominio_edu'=>isset($vals[4]['active'])?$vals[4]['active']:0
+            'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
+            'dominio_net_on'=>isset($vals[1]['active'])?$vals[1]['active']:1,
+            'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
+            'dominio_info_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
+            'dominio_edu_on'=>isset($vals[4]['active'])?$vals[4]['active']:0
         );
     }
 
@@ -259,6 +267,87 @@ protected function renderForm()
     }
 
 
+    public function getActivesTld(){
+                 if ($results = Db::getInstance()->ExecuteS('
+                 SELECT name_tld FROM '._DB_PREFIX_.'rj_checkdomain_tlds WHERE active =  1' ))
+
+              return $results;
+        }
+
+   
+
+         public function searchDomainNew($domain){
+                $tlds=$this->getActivesTld();
+                  $i=0;
+
+                foreach ($tlds as $tld){                
+                $domaincomplet=$domain"."$tld['name_tld'];
+                $arrdata[$i]["dominio"]=$domaincomplet;
+                $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld);
+                 $i++;
+                }
+
+            return $arrdata;
+            }
+
+
+    public function buscaServer($domain, $tld){
+
+        switch ($tld) {
+            case 'com':
+                $server='whois.crsnic.net';
+                $findText='No match for'      
+            break;
+
+            case 'net':
+                $server='whois.opensrs.net';
+                $findText="Can't get information"     
+            break; 
+
+            case 'org':
+                $server='whois.publicinterestregistry.net';
+                $findText='NOT FOUND'    
+            break; 
+
+            case 'info':
+                $server='whois.afilias.net';
+                $findText='NOT FOUND'      
+            break; 
+
+            case 'edu':
+                $server='whois.crsnic.net';
+                $findText='No match for'
+            break; 
+
+        }
+
+$con= fsockopen($server, 43);
+if(!$con) return "error";
+
+ // Send the requested doman name
+    fputs($con, $domain."\r\n");
+
+ // Read and store the server response
+        $response = ':';
+        while(!feof($con)) {
+            $response .= fgets($con,128); 
+        }
+
+ // Close the connection
+    fclose($con);
+
+ if (strpos($response, $findText))
+    return "disponible";
+else
+    return "no disponible";
+
+
+ 
+
+    }
+
+
+
 
     public function searchDomain($domain){
     
@@ -342,12 +431,29 @@ protected function renderForm()
         }
 
         public function getValTlds(){
+       
         if ($results = Db::getInstance()->ExecuteS('
             SELECT * FROM '._DB_PREFIX_.'rj_checkdomain_tlds'))
              
               return $results;
 
         }
+
+
+public function updateTld($name, $val){
+    //echo $name ." - ".$val;
+
+        
+
+    $res=Db::getInstance()->update('rj_checkdomain_tlds', array(
+            'active'=>$val
+            ),
+    //'name_tld='.$name
+        "name_tld = "."'$name'"
+        );
+//die();
+    return $res;
+}
 
 
 public function deleteTable(){

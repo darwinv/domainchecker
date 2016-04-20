@@ -34,7 +34,8 @@ if(Tools::getValue('action') =='getDomains' && Tools::getValue('domain')) {
 
      $dominio =Tools::getValue('domain');
 
-      $result=$RoanjaCheckDomain->searchDomain($dominio);
+     // $result=$RoanjaCheckDomain->searchDomain($dominio);
+     $result=$RoanjaCheckDomain->searchDomainNew($dominio);
 
      echo json_encode($result);
 
