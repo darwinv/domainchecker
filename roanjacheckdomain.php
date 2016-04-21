@@ -281,9 +281,9 @@ protected function renderForm()
                   $i=0;
 
                 foreach ($tlds as $tld){                
-                $domaincomplet=$domain"."$tld['name_tld'];
+                $domaincomplet=$domain.".".$tld['name_tld'];
                 $arrdata[$i]["dominio"]=$domaincomplet;
-                $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld);
+                $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
                  $i++;
                 }
 
@@ -292,31 +292,30 @@ protected function renderForm()
 
 
     public function buscaServer($domain, $tld){
-
         switch ($tld) {
             case 'com':
                 $server='whois.crsnic.net';
-                $findText='No match for'      
+                $findText='No match for';      
             break;
 
             case 'net':
                 $server='whois.opensrs.net';
-                $findText="Can't get information"     
+                $findText="Can't get information";
             break; 
 
             case 'org':
                 $server='whois.publicinterestregistry.net';
-                $findText='NOT FOUND'    
+                $findText='NOT FOUND';    
             break; 
 
             case 'info':
                 $server='whois.afilias.net';
-                $findText='NOT FOUND'      
+                $findText='NOT FOUND';     
             break; 
 
             case 'edu':
                 $server='whois.crsnic.net';
-                $findText='No match for'
+                $findText='No match for';
             break; 
 
         }
