@@ -137,8 +137,8 @@ protected function renderForm()
             'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
             'dominio_net_on'=>isset($vals[1]['active'])?$vals[1]['active']:1,
             'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
-            'dominio_info_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
-            'dominio_edu_on'=>isset($vals[4]['active'])?$vals[4]['active']:0
+            'dominio_edu_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
+            'dominio_info_on'=>isset($vals[4]['active'])?$vals[4]['active']:0
         );
     }
 
@@ -299,12 +299,12 @@ protected function renderForm()
             break;
 
             case 'net':
-                $server='whois.opensrs.net';
-                $findText="Can't get information";
+                $server='whois.opensrs.net';//whois.opensrs.net
+                $findText='No match for';
             break; 
 
             case 'org':
-                $server='whois.publicinterestregistry.net';
+                $server='whois.publicinterestregistry.net'; 
                 $findText='NOT FOUND';    
             break; 
 

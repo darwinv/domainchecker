@@ -22,46 +22,37 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-<div class="container">
+<div class="container cont-checkdomain">
 	<div class="row text-center container-form-domain">
 		<div  class="form-group col-xs-12" >
 			<p>&iexcl;{$nombre_check_domain}&#33;</p>
 		</div>
 		<form  id="form-domain" data-ruta="{$modules_dir}" >
+
 		<div class=" col-xs-12 col-sm-12 col-md-3 col-lg-2"></div>
 			<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-7">					 
 				<div class="input-group">	
 							 
-					<input class="form-control" type="text" placeholder="Escribe Tu Dominio" name="domain" />	
+					<input class="form-control busca-roanja" type="text" placeholder="Escribe Tu Dominio" name="domain" />		
+				  <div class="input-group-btn">
+				  	<button class="btn-roanja btn btn-primary" type="submit">
+				  		<span><i class="fa fa-search font-roanja"></i> Buscar</span> </button>
+					<!--<input class="btn-roanja btn btn-primary" type="submit" value="Buscar" >-->
+				</div>
 
-					<div class="input-group-btn">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Top 10 [.es, .com...] <span class="caret"></span></button>
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li class="dropdown-title-domain" >Todos</li>
-							   <li ><a href="#" data-toggle="tooltip" data-placement="left" title="Aca ira informacion sobre los dominios, desde .com, .ve, .arg, .es hasta .eu" >Top 10 [.es, .com...]</a></li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca ira infor.arg, .es hasta .eu"><a href="#">Nuevos</a></li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca hasta .eu"><a href="#">Clasicos</a></li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca ira informacion sobre los dominios, desde .com, .ve, .arg, .es hasta .eu"><a href="#">Todos</a></li>
-							<li class="dropdown-title-domain" >Otros</li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca ira informacion sobre los dominios, desde .com, .ve, .arg, .es hasta .eu" ><a href="#">Compras</a></li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca ira informacion sobre los dominios, desde .com, .ve, .arg, .es hasta .eu"><a href="#">Educaci&oacute;n/Polit&iacute;</a></li>
-							   <li data-toggle="tooltip" data-placement="left" title="Aca ira informacion sobre los dominios, desde .com, .ve, .arg, .es hasta .eu"><a href="#">Salud/Alimentaci&oacute;n</a></li>									
-						</ul>
-					</div>				
 				</div>
+
 			</div>
-			<div class="col-xs-3 col-sm-1 col-md-1 col-lg-1">
-				<div class="pull-left">
-					<input class="btn btn-primary" type="submit" value="Buscar" >
-				</div>
-			</div>
+			
 		</form>
 	</div>
+	
+<div class="domain-result hide"> 
 	<br>
 	<br>
 	<hr>
-	<br>
-	<br>
+
+	
 	<div class="row text-center" style="margin: 30px">
 		<table id="table-domains" class="table table-hover">
 			<thead>
@@ -76,4 +67,11 @@
 			</tbody>
 		</table>
 	</div>
+	<div class="foot-checkdomain">		
+			<span class="no-select-domains"> No has seleccionado ning&uacute;n dominio </span> 
+			<span id="num-domains" class="select-domains hide" >0</span><span class="select-domains hide"> Dominios seleccionados </span>
+			<button disabled class='btn btn-primary send-choose-domain'>Procesar <i class='fa fa-shopping-cart fa-2x '></i></button>
+		</div>
+</div>
+
 </div>

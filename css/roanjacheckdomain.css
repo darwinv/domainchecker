@@ -13,6 +13,66 @@
 #table-domains i.fa-times{
  	color: #ce0000;
 }
+
+.opac05{
+    opacity: 0.5;
+}
+
+div.cont-checkdomain .table tbody > tr > td {
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    div.foot-checkdomain{
+        padding-right: inherit;
+    }
+    div.cont-checkdomain .price-behind {
+        margin-top: 0em;
+    }
+    div.cont-checkdomain input.form-control.domain {
+        font-size: 16px;
+    }
+}
+
+
+div.cont-checkdomain input.form-control{
+    height: 34px;   /*PS-defaul 32px, leotheme 34px*/
+}
+div.cont-checkdomain .col-xs-12, div.cont-checkdomain .col-sm-12, div.cont-checkdomain .col-md-12, div.cont-checkdomain .col-lg-12 {
+    float: left;
+}
+div.cont-checkdomain p{
+    line-height: 1.42857;
+}
+
+.btn-roanja{
+    background-color: rgb(151, 180, 68);
+    border-color: rgb(151, 180, 68);
+    border-radius: 0px 24px 24px 0px;
+}
+
+.btn-roanja:hover,
+.btn-roanja:active,
+.btn-roanja:focus{
+    background-color: rgb(151, 180, 68);
+    border-color: rgb(151, 180, 68);
+
+}
+
+.font-roanja{
+font-size: 17px !important;
+}
+
+.busca-roanja {
+    border-radius: 24px 0px 0px 24px;
+}
+
+.busca-roanja:focus {
+    border-color: rgb(169, 171, 165);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgb(239, 243, 229);
+    outline: 0px none;
+}
 .container-form-domain p {
 	color: #ff9933;
 	font-family: "myriad-pro-condensed",sans-serif;
