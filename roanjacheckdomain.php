@@ -5,8 +5,15 @@
 if (!defined('_PS_VERSION_'))
  exit;
 
+require (_PS_MODULE_DIR_.'roanjacheckdomain/vendor/autoload.php');
+//include_once(_PS_MODULE_DIR_.'homeslider/HomeSlide.php');
+use Helge\Loader\JsonLoader;
+use Helge\Client\SimpleWhoisClient;
+use Helge\Service\DomainAvailability;
 
 class RoanjaCheckDomain extends Module {
+
+
 
         public function __construct()
             {
@@ -277,13 +284,25 @@ protected function renderForm()
    
 
          public function searchDomainNew($domain){
+
+            $whoisClient = new SimpleWhoisClient();
+            $dataLoader = new JsonLoader("src/data/servers.json");
+
+            $service = new DomainAvailability($whoisClient, $dataLoader);
+
                 $tlds=$this->getActivesTld();
                   $i=0;
 
                 foreach ($tlds as $tld){                
                 $domaincomplet=$domain.".".$tld['name_tld'];
                 $arrdata[$i]["dominio"]=$domaincomplet;
-                $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
+
+
+if($service->isAvailable($domaincomplet)) 
+    $arrdata[$i]["estado"]="disponible";
+else 
+    $arrdata[$i]["estado"]="no disponible";
+              //  $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
                  $i++;
                 }
 
