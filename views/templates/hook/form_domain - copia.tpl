@@ -41,7 +41,7 @@
 					<!--<input class="btn-roanja btn btn-primary" type="submit" value="Buscar" >-->
 				</div>
 				<div class="input-group-btn" style="font-size:10px">	
-				 <a class="newpage">New page </a>
+				 <a href="/daniela/index.php?fc=module&module=roanjacheckdomain&controller=pagedomain">	New page </a>
 				 </div>
 
 				</div>
@@ -50,5 +50,32 @@
 			
 		</form>
 	</div>
+	
+<div class="domain-result hide"> 
+	<br>
+	<br>
+	<hr>
+
+	
+	<div class="row text-center" style="margin: 30px">
+		<table id="table-domains" class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">Dominio</th>
+					<th class="text-center">Disponibilidad</th>
+					<th class="text-center">Agregar a Carrito</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--Body Dinamy-->
+			</tbody>
+		</table>
+	</div>
+	<div class="foot-checkdomain">		
+			<span class="no-select-domains"> No has seleccionado ning&uacute;n dominio </span> 
+			<span id="num-domains" class="select-domains hide" >0</span><span class="select-domains hide"> Dominios seleccionados </span>
+			<button disabled class='btn btn-primary send-choose-domain'>Procesar <i class='fa fa-shopping-cart fa-2x '></i></button>
+		</div>
+</div>
 
 </div>

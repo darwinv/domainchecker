@@ -3,6 +3,7 @@ $(document).ready(function(){
   
 	$(document).on('submit', '#form-domain', function(e) {
     e.preventDefault();
+    
    var form,ruta,$container,newreg="";
     var form=$(e.target);
     var ruta=$(this).data("ruta");
@@ -47,6 +48,27 @@ $container.find('.domain-result').removeClass('hide');
       }
     });
   });
+
+
+$(document).on('click', '.newpage', function(e) {
+var pathname= window.location.pathname;
+var host= window.location.host;
+var ruta=host+pathname;
+
+alert(pathname);
+alert(host);
+alert(ruta);
+//var ruta_modif=
+window.location.search="fc=module&module=roanjacheckdomain&controller=pagedomain";
+
+//"http://localhost/daniela/index.php?fc=module&module=roanjacheckdomain&controller=pagedomain"
+
+
+
+
+
+  });
+
 
 
 $(document).on('click', '.choose-domain', function(e) {

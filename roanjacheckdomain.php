@@ -128,6 +128,7 @@ protected function renderForm()
         $this->updateTld("org",Tools::getValue('dominio_org_on'));
         $this->updateTld("info",Tools::getValue('dominio_info_on'));
         $this->updateTld("edu",Tools::getValue('dominio_edu_on'));
+        $this->updateTld("es",Tools::getValue('dominio_es_on'));
         //echo $form_values["ROANJA_CHECKDOMAIN_NAME"];
     } 
 
@@ -145,7 +146,8 @@ protected function renderForm()
             'dominio_net_on'=>isset($vals[1]['active'])?$vals[1]['active']:1,
             'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
             'dominio_edu_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
-            'dominio_info_on'=>isset($vals[4]['active'])?$vals[4]['active']:0
+            'dominio_info_on'=>isset($vals[4]['active'])?$vals[4]['active']:0,
+            'dominio_es_on'=>isset($vals[5]['active'])?$vals[5]['active']:0
         );
     }
 
@@ -234,6 +236,22 @@ protected function renderForm()
                     'type' => 'checkbox',
                     'name' => 'dominio_info',
                     'label' => $this->l('Enable .info'),
+                    'values' => array(
+                        'query' => array(
+                            array(
+                                'id' => 'on',
+                                'val' => '1'
+                            ),
+                        ),
+                        'id' => 'id',
+                        'name' => 'name'
+                    )
+                ), 
+
+                 array(
+                    'type' => 'checkbox',
+                    'name' => 'dominio_es',
+                    'label' => $this->l('Enable .es'),
                     'values' => array(
                         'query' => array(
                             array(
@@ -443,6 +461,11 @@ else
             'name_tld' => 'info',
             'active' => 0,
              ));
+
+               $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+            'name_tld' => 'es',
+            'active' => 0,
+             ));
 //echo $getMsgError();
            return $res;
         
@@ -460,8 +483,7 @@ else
 
 public function updateTld($name, $val){
     //echo $name ." - ".$val;
-
-        
+      
 
     $res=Db::getInstance()->update('rj_checkdomain_tlds', array(
             'active'=>$val
