@@ -1,11 +1,12 @@
 	
-<div class="cont-checkdomain"> 
+<div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}"> 
+		
 		<div class="domain-result hide"> 
 			<br>
 			<br>
 			<hr>
 
-			
+					
 			<div class="row text-center" style="margin: 30px">
 				<table id="table-domains" class="table table-hover">
 					<thead>

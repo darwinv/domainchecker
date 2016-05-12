@@ -27,7 +27,7 @@
 		<div  class="form-group col-xs-6">
 			<p>&iexcl;{$nombre_check_domain}&#33;</p>
 		</div>
-		<form  id="form-domain" data-ruta="{$modules_dir}" >
+		<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
 
 		<div class=" col-xs-12 col-sm-12 col-md-3 col-lg-2"></div>
 			<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-7">					 
@@ -41,8 +41,8 @@
 					<!--<input class="btn-roanja btn btn-primary" type="submit" value="Buscar" >-->
 				</div>
 				<div class="input-group-btn" style="font-size:10px">	
-				 <a class="newpage">New page </a>
-				 </div>
+			    <a href="{$link->getModuleLink('roanjacheckdomain','pagedomain')}">New page </a>			  
+			  </div>
 
 				</div>
 
