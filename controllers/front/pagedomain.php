@@ -36,6 +36,8 @@ class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontContro
 		$module_action=Tools::getValue('method');
 		$action_list = array('ajaxlist'=>'initAjaxList',
 			'newpage'=>'initNewPage');*/
+        $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
+         $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
 		$this->setTemplate('view_domains.tpl');
 	  }
 
@@ -47,12 +49,11 @@ class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontContro
 
 	  }
 
-
-	  /* public function setMedia(){
+	  public function setMedia(){
 	  	parent::setMedia();
+$this->context->controller->addJS($this->module->getLocalPath().'js/checkdomain.js');
+	  //	$this->path=_PS_MODULE_DIR_.'modules/roanjacheckdomain/';
 
-	  	$this->path=_PS_BASE_URI_.'modules/roanjacheckdomain/';
-
-	  	$this->context->controller->addJS($this->path.'js/roanjacheckdomain.js');
-	  } */
+	  //	$this->context->controller->addJS($this->path.'js/checkdomain.js');
+	  }
 }

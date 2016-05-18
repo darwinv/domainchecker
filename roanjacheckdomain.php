@@ -142,7 +142,7 @@ protected function renderForm()
 
         return array(
             'ROANJA_CHECKDOMAIN_NAME' => Configuration::get('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher"),
-            'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
+           'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
             'dominio_net_on'=>isset($vals[1]['active'])?$vals[1]['active']:1,
             'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
             'dominio_edu_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,

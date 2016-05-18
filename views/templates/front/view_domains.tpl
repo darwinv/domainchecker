@@ -1,4 +1,6 @@
 	
+<!-- {include file="$ruta_modulo./views/templates/hook/form_domain.tpl"} -->
+<img id="my_loader" src="{$modules_dir}reload.gif"/>
 <div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}"> 
 		
 		<div class="domain-result hide"> 
@@ -13,6 +15,7 @@
 						<tr>
 							<th class="text-center">Dominio</th>
 							<th class="text-center">Disponibilidad</th>
+					 <!-- <th class="text-center">Precio</th> -->
 							<th class="text-center">Agregar a Carrito</th>
 						</tr>
 					</thead>

@@ -21,34 +21,27 @@
 *  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
-*}
+*} 
 <div class="container cont-checkdomain">
-	<div class="row text-center container-form-domain">
-		<div  class="form-group col-xs-6">
-			<p>&iexcl;{$nombre_check_domain}&#33;</p>
-		</div>
-		<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
-
-		<div class=" col-xs-12 col-sm-12 col-md-3 col-lg-2"></div>
-			<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-7">					 
-				<div class="input-group">	
-							 
-					<input class="form-control busca-roanja" type="text" placeholder="Escribe Tu Dominio" name="domain"/>		
-				  <div class="input-group-btn">
-				  <button class="btn-roanja btn btn-primary" type="submit">
-				  		<span><i class="fa fa-search font-roanja"></i> Buscar</span> </button>
-
-					<!--<input class="btn-roanja btn btn-primary" type="submit" value="Buscar" >-->
+	<div class="row text-center container-form-domain"> <!-- -->
+		<div class="col-xs-12 col-lg-12"> 
+				<div class="row"> 
+					<div class="form-group col-xs-6 col-lg-6" style="margin: auto; float: none;">
+						<p>{$nombre_check_domain}</p>
+					</div>
 				</div>
-				<div class="input-group-btn" style="font-size:10px">	
-			    <a href="{$link->getModuleLink('roanjacheckdomain','pagedomain')}">New page </a>			  
-			  </div>
-
-				</div>
-
+		<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-6" style="margin: auto; float: none;">
+			<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
+						<div class="input-group">	
+									 
+							<input id="domain" class="form-control busca-roanja" type="text" placeholder="Escribe Tu Dominio" name="domain" value="{$smarty.post.domain}"/>		
+						  <div class="input-group-btn">
+						  <button class="btn-roanja btn btn-primary" type="submit">
+						  		<span><i class="fa fa-search font-roanja"></i> Buscar</span> </button>
+						</div>
+						</div>
+				</form>	
 			</div>
-			
-		</form>
+		</div>
 	</div>
-
 </div>
