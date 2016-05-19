@@ -1,8 +1,4 @@
-	
-<!-- {include file="$ruta_modulo./views/templates/hook/form_domain.tpl"} -->
-<img id="my_loader" src="{$modules_dir}reload.gif"/>
-<div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}"> 
-		
+<div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}"> 	
 		<div class="domain-result hide"> 
 			<br>
 			<br>
@@ -27,7 +23,7 @@
 				<div class="foot-checkdomain">		
 						<span class="no-select-domains"> No has seleccionado ning&uacute;n dominio </span> 
 						<span id="num-domains" class="select-domains hide" >0</span><span class="select-domains hide"> Dominios seleccionados </span>
-						<button disabled class='btn btn-primary send-choose-domain'>Procesar <i class='fa fa-shopping-cart fa-2x '></i></button>
+						<button disabled class='btn btn-primary send-choose-domain'>Procesar <i class='fa fa-shopping-cart fa-2x'></i></button>
 				</div>
 		</div>
 

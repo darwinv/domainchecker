@@ -5,11 +5,10 @@
 if (!defined('_PS_VERSION_'))
  exit;
 
-require (_PS_MODULE_DIR_.'roanjacheckdomain/vendor/autoload.php');
+
+
 //include_once(_PS_MODULE_DIR_.'homeslider/HomeSlide.php');
-use Helge\Loader\JsonLoader;
-use Helge\Client\SimpleWhoisClient;
-use Helge\Service\DomainAvailability;
+
 
 class RoanjaCheckDomain extends Module {
 
@@ -50,13 +49,10 @@ class RoanjaCheckDomain extends Module {
          public function uninstall()
         {
            $res =  Configuration::deleteByName('ROANJA_CHECKDOMAIN_NAME');
-          if (!parent::uninstall()) {
+        Db::getInstance()->execute('DROP TABLE '._DB_PREFIX_.'rj_checkdomain_tlds');
 
-           $res &= $this->dropTables();
-            return (bool)$res;
-          }
+        return parent::uninstall();
             
-          return true;
         } 
 
 
@@ -300,62 +296,24 @@ protected function renderForm()
         }
 
    
+ public function searchDomainNew($domain){
+require_once(_PS_MODULE_DIR_.'roanjacheckdomain/checkfix.php');
+         $tlds=$this->getActivesTld();
+         $i=0;
 
-         public function searchDomainNew($domain){
-
-            $whoisClient = new SimpleWhoisClient();
-            $dataLoader = new JsonLoader("src/data/servers.json");
-
-            $service = new DomainAvailability($whoisClient, $dataLoader);
-
-                $tlds=$this->getActivesTld();
-                  $i=0;
-
-                foreach ($tlds as $tld){                
+foreach ($tlds as $tld){                
                 $domaincomplet=$domain.".".$tld['name_tld'];
                 $arrdata[$i]["dominio"]=$domaincomplet;
-
 
 if($service->isAvailable($domaincomplet)) 
     $arrdata[$i]["estado"]="disponible";
 else 
     $arrdata[$i]["estado"]="no disponible";
-              //  $arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
                  $i++;
                 }
 
             return $arrdata;
             }
-
-
-    public function buscaServer($domain, $tld){
-        switch ($tld) {
-            case 'com':
-                $server='whois.crsnic.net';
-                $findText='No match for';      
-            break;
-
-            case 'net':
-                $server='whois.opensrs.net';//whois.opensrs.net
-                $findText='No match for';
-            break; 
-
-            case 'org':
-                $server='whois.publicinterestregistry.net'; 
-                $findText='NOT FOUND';    
-            break; 
-
-            case 'info':
-                $server='whois.afilias.net';
-                $findText='NOT FOUND';     
-            break; 
-
-            case 'edu':
-                $server='whois.crsnic.net';
-                $findText='No match for';
-            break; 
-
-        }
 
 $con= fsockopen($server, 43);
 if(!$con) return "error";
@@ -376,10 +334,6 @@ if(!$con) return "error";
     return "disponible";
 else
     return "no disponible";
-
-
- 
-
     }
 
 
