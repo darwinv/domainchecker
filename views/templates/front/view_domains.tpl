@@ -1,3 +1,5 @@
+{include file="$ruta_modulo./views/templates/hook/form_domain.tpl"}
+<div id="dimmer"></div>
 <div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}"> 	
 		<div class="domain-result hide"> 
 			<br>

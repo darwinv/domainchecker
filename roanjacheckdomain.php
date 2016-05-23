@@ -38,7 +38,7 @@ class RoanjaCheckDomain extends Module {
          public function install()
         {
              Configuration::updateValue('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher");
-            if(parent::install() && $this->registerHook('displayTopColumn') && $this->registerHook('displayHeader')
+            if(parent::install() && $this->registerHook('home') && $this->registerHook('displayHeader')
              && $this->createTable())
               return true;
          else 
@@ -309,32 +309,13 @@ if($service->isAvailable($domaincomplet))
     $arrdata[$i]["estado"]="disponible";
 else 
     $arrdata[$i]["estado"]="no disponible";
+              //$arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
                  $i++;
                 }
 
             return $arrdata;
             }
 
-$con= fsockopen($server, 43);
-if(!$con) return "error";
-
- // Send the requested doman name
-    fputs($con, $domain."\r\n");
-
- // Read and store the server response
-        $response = ':';
-        while(!feof($con)) {
-            $response .= fgets($con,128); 
-        }
-
- // Close the connection
-    fclose($con);
-
- if (strpos($response, $findText))
-    return "disponible";
-else
-    return "no disponible";
-    }
 
 
 
@@ -369,7 +350,7 @@ else
     }
 
 
-    public function hookdisplayTopColumn()
+    public function hookHome()
         {
            $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
             

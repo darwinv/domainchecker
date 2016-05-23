@@ -30,12 +30,15 @@
 class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontController
 {
 
+	public $display_column_left = false;
+
 	public function initContent(){
 		parent::initContent();
 		/*$domain=Tools::getValue('domain');
 		$module_action=Tools::getValue('method');
 		$action_list = array('ajaxlist'=>'initAjaxList',
 			'newpage'=>'initNewPage');*/
+  $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
         $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
          $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
 		$this->setTemplate('view_domains.tpl');
