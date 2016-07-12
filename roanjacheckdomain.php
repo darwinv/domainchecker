@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 
@@ -23,9 +23,9 @@ class RoanjaCheckDomain extends Module {
                 $this->need_instance = 0;
               //  $this->secure_key = Tools::encrypt($this->name);
                 $this->bootstrap = true;
-                
+
                 parent::__construct();
-                
+
                 $this->displayName = $this->l('Roanja Domain Checker');
                 $this->description = $this->l('With this module, your customers will be able to check the available domains');
                 $this->ps_versions_compliancy = array('min' => _PS_VERSION_, 'max' => _PS_VERSION_);
@@ -34,29 +34,26 @@ class RoanjaCheckDomain extends Module {
             }
 
 
-         
+
          public function install()
         {
              Configuration::updateValue('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher");
             if(parent::install() && $this->registerHook('home') && $this->registerHook('displayHeader')
              && $this->createTable())
               return true;
-         else 
+         else
           return false;
          }
 
- 
+
          public function uninstall()
         {
            $res =  Configuration::deleteByName('ROANJA_CHECKDOMAIN_NAME');
         Db::getInstance()->execute('DROP TABLE '._DB_PREFIX_.'rj_checkdomain_tlds');
 
         return parent::uninstall();
-            
-        } 
 
-
-
+        }
 
 
 
@@ -65,18 +62,18 @@ class RoanjaCheckDomain extends Module {
             /**
          * If values have been submitted in the form, process.
          */
-           
+
             if (((bool)Tools::isSubmit('submitcheckdomain')) == true) {
                 $this->postProcess();
-            } 
+            }
 
-              
+
             $this->context->smarty->assign('module_dir', $this->_path);
             // $nombre=Configuration::get('ROANJA_CHECKDOMAIN_NAME')
-            
-            $output = $this->context->smarty->fetch($this->local_path.'views/templates/admin/configure.tpl');
 
-            return $output.$this->renderForm();
+          $output = $this->context->smarty->fetch($this->local_path.'views/templates/admin/configure.tpl');
+          $output = $this->renderForm();
+            return $output;
         }
 
 
@@ -125,8 +122,9 @@ protected function renderForm()
         $this->updateTld("info",Tools::getValue('dominio_info_on'));
         $this->updateTld("edu",Tools::getValue('dominio_edu_on'));
         $this->updateTld("es",Tools::getValue('dominio_es_on'));
+
         //echo $form_values["ROANJA_CHECKDOMAIN_NAME"];
-    } 
+    }
 
 
  /**
@@ -138,7 +136,7 @@ protected function renderForm()
 
         return array(
             'ROANJA_CHECKDOMAIN_NAME' => Configuration::get('ROANJA_CHECKDOMAIN_NAME', "YourDomainSearcher"),
-           'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1, 
+           'dominio_com_on'=>isset($vals[0]['active'])?$vals[0]['active']:1,
             'dominio_net_on'=>isset($vals[1]['active'])?$vals[1]['active']:1,
             'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
             'dominio_edu_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
@@ -161,7 +159,7 @@ protected function renderForm()
                 'input' => array(
                      array(
                         'col' => 3,
-                        'type' => 'text',       
+                        'type' => 'text',
                         'desc' => $this->l('Enter the name of the domain checker'),
                         'name' => 'ROANJA_CHECKDOMAIN_NAME',
                         'label' => $this->l('Name'),
@@ -180,7 +178,7 @@ protected function renderForm()
                         'id' => 'id',
                         'name' => 'name'
                     )
-                ), 
+                ),
                 array(
                     'type' => 'checkbox',
                     'name' => 'dominio_net',
@@ -195,7 +193,7 @@ protected function renderForm()
                         'id' => 'id',
                         'name' => 'name'
                     )
-                ), 
+                ),
                  array(
                     'type' => 'checkbox',
                     'name' => 'dominio_org',
@@ -242,7 +240,7 @@ protected function renderForm()
                         'id' => 'id',
                         'name' => 'name'
                     )
-                ), 
+                ),
 
                  array(
                     'type' => 'checkbox',
@@ -258,7 +256,7 @@ protected function renderForm()
                         'id' => 'id',
                         'name' => 'name'
                     )
-                )                   
+                )
         ),
                 'submit' => array(
                     'title' => $this->l('Save'),
@@ -266,6 +264,8 @@ protected function renderForm()
              ),
         );
     }
+
+
 
  /**
     * Add the CSS & JavaScript files you want to be loaded in the BO.
@@ -292,76 +292,81 @@ protected function renderForm()
                  if ($results = Db::getInstance()->ExecuteS('
                  SELECT name_tld FROM '._DB_PREFIX_.'rj_checkdomain_tlds WHERE active =  1' ))
 
-              return $results;
+                 return $results;
         }
 
-   
+
  public function searchDomainNew($domain){
-require_once(_PS_MODULE_DIR_.'roanjacheckdomain/checkfix.php');
-         $tlds=$this->getActivesTld();
-         $i=0;
+        require_once(_PS_MODULE_DIR_.'roanjacheckdomain/checkfix.php');
+                 $tlds=$this->getActivesTld();
+                 $i=0;
 
-foreach ($tlds as $tld){                
+        foreach ($tlds as $tld){
+                $sutld=".".$tld['name_tld'];
+                $datatlds=$this->getDataTldProduct($sutld);
+
+       $this->product = new Product($datatlds[0]['id_product'], false,$this->context->language->id);
+                $precioconv=Tools::convertPrice($this->product->price, $this->context->currency);
+                $arrdata[$i]["precio"]=number_format($precioconv, 2, ",", "");
+
+                $arrdata[$i]['id_producto']=$datatlds[0]['id_product'];
+                $arrdata[$i]['sign']=$this->context->currency->sign;
                 $domaincomplet=$domain.".".$tld['name_tld'];
+
                 $arrdata[$i]["dominio"]=$domaincomplet;
+                $valor='&amp;';
+                $val=html_entity_decode($valor);
+$arrdata[$i]["url_cart"]=$this->context->link->getPageLink('cart',false,NULL,'add=1'.$valor.'id_product='.$datatlds[0]['id_product'].'','false');
+                if($service->isAvailable($domaincomplet))
+                    $arrdata[$i]["estado"]="disponible";
+                else
+                    $arrdata[$i]["estado"]="no disponible";
 
-if($service->isAvailable($domaincomplet)) 
-    $arrdata[$i]["estado"]="disponible";
-else 
-    $arrdata[$i]["estado"]="no disponible";
-              //$arrdata[$i]["estado"]=$this->buscaServer($domain,$tld["name_tld"]);
-                 $i++;
-                }
+                $i++;
+        }//fin del foreach
 
-            return $arrdata;
-            }
-
-
-
-
-
-    public function searchDomain($domain){
-    
-      $server="whois.crsnic.net";//"whois.crsnic.net"; 
-      $findText="No match for"; //Can't get information
-      $con = fsockopen($server, 43);
-        if (!$con) return array("dominio"=>$domain,"disponible"=>false);
-        
-        // Send the requested doman name
-        fputs($con, $domain."\r\n");
-        
-        // Read and store the server response
-        $response = ':';
-        while(!feof($con)) {
-            $response .= fgets($con,128); 
-        }
-        
-        // Close the connection
-        fclose($con);
-        
-        // Check the response stream whether the domain is available
-        if (strpos($response, $findText)){
-            return array("dominio"=>$domain,"disponible"=>true);
-        }
-        else {
-            return array("dominio"=>$domain,"disponible"=>false);   
-        }
-        
+      return $arrdata;
     }
+
 
 
     public function hookHome()
         {
            $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
-            
+
             return $this->display(__FILE__, 'form_domain.tpl', $this->getCacheId());
         }
 
 
+public function updateCart($idproducto)
+{
+    //$this->product = new Product($idproducto, false,$this->context->language->id);
+   //$val=$this->context->cart->updateQty(1, $idproducto);
+    return array("result"=>true);
+
+}
+
+public function deleteProductCart($idproducto){
+
+
+}
+
+public function getDataTldProduct($tld){
+
+    if($results= Db::getInstance()->ExecuteS('
+                 SELECT pr.id_product
+                  FROM '._DB_PREFIX_.'product pr
+                  Inner Join '._DB_PREFIX_.'product_lang pl ON (pl.id_product=pr.id_product)
+                  WHERE pl.name="'.$tld.'" AND pl.id_shop='.(int)$this->context->shop->id.'
+                  LIMIT 1 ' ));
+
+        return $results;
+}
+
 
         /* Create the tables for the checkboxes of tlds */
         protected function createTable(){
-            
+
             $res = (bool)Db::getInstance()->execute('
             CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'rj_checkdomain_tlds` (
                 `id_tld` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -403,14 +408,15 @@ else
              ));
 //echo $getMsgError();
            return $res;
-        
+
         }
 
-        public function getValTlds(){
-       
+
+public function getValTlds(){
+
         if ($results = Db::getInstance()->ExecuteS('
             SELECT * FROM '._DB_PREFIX_.'rj_checkdomain_tlds'))
-             
+
               return $results;
 
         }
@@ -418,7 +424,7 @@ else
 
 public function updateTld($name, $val){
     //echo $name ." - ".$val;
-      
+
 
     $res=Db::getInstance()->update('rj_checkdomain_tlds', array(
             'active'=>$val
@@ -437,7 +443,7 @@ public function deleteTable(){
             DROP TABLE IF EXISTS `'._DB_PREFIX_.'rj_checkdomain_tlds`;
         ');
 
-} 
+}
 
 public static function dropTables()
     {
@@ -447,7 +453,7 @@ public static function dropTables()
         return Db::getInstance()->execute($sql);
     }
 
-        
+
 
 
 

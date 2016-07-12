@@ -21,27 +21,35 @@
 *  @copyright  2007-2014 PrestaShop SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
-*} 
+*}
+
+{if isset($smarty.post.domain)}
+{assign var="val" value=$smarty.post.domain}
+{else}
+{assign var="val" value=""}
+{/if}
+<div class="rj-background">
 <div class="container cont-checkdomain">
 	<div class="row text-center container-form-domain"> <!-- -->
-		<div class="col-xs-12 col-lg-12"> 
-				<div class="row"> 
+		<div class="col-xs-12 col-lg-12">
+				<div class="row">
 					<div class="form-group col-xs-6 col-lg-6" style="margin: auto; float: none;">
-						<p>{$nombre_check_domain}</p>
+						<p id="nombreBuscador" class="rj-title">{$nombre_check_domain}</p>
 					</div>
 				</div>
 		<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-6" style="margin: auto; float: none;">
 			<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
-						<div class="input-group">	
-									 
-							<input id="domain" class="form-control busca-roanja" type="text" placeholder="Escribe Tu Dominio" name="domain" value="{$smarty.post.domain}"/>		
+						<div class="input-group">
+
+							<input id="domain" class="form-control busca-roanja" type="text" placeholder="Escribe tu dominio" name="domain" value="{$val}"/>
 						  <div class="input-group-btn">
-						  <button class="btn-roanja btn btn-primary" type="submit">
-						  		<span><i class="fa fa-search font-roanja"></i> Buscar</span> </button>
+						  <button class="btn-roanja" type="submit">
+						  		<span><i class="fa fa-search font-roanja"></i></span> </button>
 						</div>
 						</div>
-				</form>	
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

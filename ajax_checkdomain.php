@@ -41,3 +41,15 @@ if(Tools::getValue('action') =='getDomains' && Tools::getValue('domain')) {
 
       
 }
+
+if(Tools::getValue('action') =='setCartDomain' && Tools::getValue('producto')) {
+    
+	$result=$RoanjaCheckDomain->updateCart(Tools::getValue('producto'));
+      echo json_encode($result);
+     // $result=$RoanjaCheckDomain->searchDomain($dominio);
+     
+
+     
+
+      
+}

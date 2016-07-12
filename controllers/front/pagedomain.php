@@ -34,13 +34,17 @@ class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontContro
 
 	public function initContent(){
 		parent::initContent();
+		$this->product = new Product(2, false,$this->context->language->id);
+
 		/*$domain=Tools::getValue('domain');
 		$module_action=Tools::getValue('method');
 		$action_list = array('ajaxlist'=>'initAjaxList',
 			'newpage'=>'initNewPage');*/
+
+	$this->context->smarty->assign('product',Configuration::get('PS_CATALOG_MODE'));
   $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
-        $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
-         $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
+  $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
+  $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
 		$this->setTemplate('view_domains.tpl');
 	  }
 
