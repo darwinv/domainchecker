@@ -35,13 +35,16 @@ $.ajax({
           var year="al año";
            for(i=0;i<data.length;i++){
             $container.find('.domain-result').removeClass('hide');
+						var arrtld=data[i]["dominio"].split(".");
+						var cleandominio=arrtld[0];
+						var tld=arrtld[1];
             newreg+="<tr><td >" + data[i]["dominio"]+ "</td>";
             if(data[i]["estado"]=='disponible'){
                     newreg+="<td><i class='fa fa-check fa-2x'></i><span class='hidden-xs' style='color:green'> Disponible</span>&nbsp";
                     newreg+="<span class='price'>" + data[i]['precio'] + data[i]['sign'] + "</span>&nbsp<span class='price-behind'>/"+year+"</span><br class='visible-xs'></td>";
      //newreg+="<td><button id='select-domain-"+data[i]['id_producto']+"' class='btn btn-primary choose-domain' data-nombre="+data[i]['dominio']+" data-dominio="+data[i]['id_producto']+">Agregar<i class='fa fa-shopping-cart fa-2x '></i></button></td></tr>";
 								var url_cart=decodeURIComponent(data[i]['url_cart']);//.replace("%3D","=");
-					newreg+="<td><a class='button ajax_add_to_cart_button choose-domain btn btn-default' rel='nofollow' data-id-product="+data[i]['id_producto']+" href="+data[i]['url_cart']+"  data-nombre="+data[i]['dominio']+" data-dominio="+data[i]['id_producto']+"> <i class='fa fa-shopping-cart fa-2x '></i> Agregar </a></td></tr>";
+					newreg+="<td><a class='nomb_"+cleandominio+'-'+tld+" button ajax_add_to_cart_button choose-domain btn btn-default' rel='nofollow' data-id-product="+data[i]['id_producto']+" href="+data[i]['url_cart']+" data-tld="+tld+" data-nombre="+data[i]['dominio']+" data-dominio="+data[i]['id_producto']+"> <i class='fa fa-shopping-cart fa-2x '></i> Agregar </a></td></tr>";
 			          }
                 if(data[i]["estado"]=='no disponible'){
    newreg+="<td><i class='fa fa-times fa-2x'></i><span class='hidden-xs' style='color:red'> No disponible</span></td><td></td>";
@@ -63,9 +66,13 @@ $.ajax({
 $(document).on('click', '.choose-domain', function(e) {
     var ruta=$('#form-domain').data("ruta");
    var id_producto = $(this).data('dominio');
-   var nombre=$(this).data('nombre');
-
+   var nombre=$(this).data('nombre').split(".");
+	 var tld=$(this).data('tld');
+	var nombrecomp=nombre[0]+"-"+tld;
   var envproducto="producto="+id_producto;
+
+  $(this).html(" <i class='fa fa-check-square-o fa-2x '></i>Agregado");
+
 $(this).addClass("disabled");
   $.ajax({
           url:ruta+"roanjacheckdomain/ajax_checkdomain.php",
@@ -75,15 +82,20 @@ $(this).addClass("disabled");
          success:function(data){
          if(data.result){
 
-   $('#append-dominio').append('<span class="cartdomains btn btn-default" title="eliminar" data-id='+id_producto+' ><i class="fa fa-times-circle" aria-hidden="true"></i>'+nombre+'</span>');
+   $('#append-dominio').append('<span class="cartdomains" title="eliminar"  data-id='+id_producto+' > <span data-nombre='+nombrecomp+'> <i class="fa fa-times-circle" aria-hidden="true"></i> </span>'+nombre+'</span>');
          }
             }
         })
 
   });
 
-$(document).on('click','.cartdomains',function(e){
-var idproducto=$(this).data("id");
+$(document).on('click','.cartdomains > span',function(e){
+	var nombredominio=$(this).data('nombre');
+$('.nomb_'+nombredominio).removeClass('disabled');
+console.log($('.nomb_'+nombredominio));
+$('.nomb_'+nombredominio).html("<i class='fa fa-shopping-cart fa-2x '></i>Agregar");
+//var val=$(this).parent('span');
+$(this).parent('span').remove;
 
 
 });

@@ -137,7 +137,12 @@ background: #ff9933;
 background-color: rgb(151, 180, 68);
 color: white;
 padding: 8px;
+margin: 2% 1%;
+display: inline-block;
 border-radius: 9px 9px 9px 9px;
+}
+.cartdomains > span{
+  cursor: pointer;
 }
 
 .busca-roanja:focus {
@@ -153,6 +158,13 @@ border-radius: 9px 9px 9px 9px;
 	font-weight: normal;
 	margin: 0px 0px 40px;
 }
+
+.button.ajax_add_to_cart_button.choose-domain.btn.btn-default.disabled {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+
+  }
+
 
 p.rj-title {
 			    font-size: 60px;
