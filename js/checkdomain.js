@@ -95,7 +95,7 @@ $('.nomb_'+nombredominio).removeClass('disabled');
 console.log($('.nomb_'+nombredominio));
 $('.nomb_'+nombredominio).html("<i class='fa fa-shopping-cart fa-2x '></i>Agregar");
 //var val=$(this).parent('span');
-$(this).parent('span').remove;
+$(this).parent('span').remove();
 
 
 });
