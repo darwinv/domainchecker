@@ -34,7 +34,8 @@
 		<div class="col-xs-12 col-lg-12">
 				<div class="row">
 					<div class="form-group col-xs-6 col-lg-6" style="margin: auto; float: none;">
-						<p id="nombreBuscador" class="rj-title">{l s='Find your Domain' mod='roanjacheckdomain'}</p> <!-- {$nombre_check_domain} -->
+						<p id="nombreBuscador" class="rj-title">{l s='Da el primer paso' mod='roanjacheckdomain'}</p> <!-- {$nombre_check_domain} -->
+								<p>{l s='buscando tu dominio' mod='roanjacheckdomain'}</p>
 					</div>
 				</div>
 		<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-6" style="margin: auto; float: none;">
