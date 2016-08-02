@@ -167,7 +167,7 @@ border-radius: 9px 9px 9px 9px;
 
 
 p.rj-title {
-			    font-size: 60px;
+			    font-size: 50px;
 			    margin: 0px;
 			    margin-bottom: 5px;
 	}
@@ -177,6 +177,6 @@ p.rj-title {
 			    background-repeat-x: no-repeat;
 			    background-repeat-y: no-repeat;
 			    min-height: 450px;
-			    margin-left: -90px;
-			    margin-right: -90px;
+			    margin-left: -300px;
+			    margin-right: -300px;
 			}

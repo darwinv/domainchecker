@@ -34,14 +34,14 @@
 		<div class="col-xs-12 col-lg-12">
 				<div class="row">
 					<div class="form-group col-xs-6 col-lg-6" style="margin: auto; float: none;">
-						<p id="nombreBuscador" class="rj-title">{$nombre_check_domain}</p>
+						<p id="nombreBuscador" class="rj-title">{l s='Find your Domain' mod='roanjacheckdomain'}</p> <!-- {$nombre_check_domain} -->
 					</div>
 				</div>
 		<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-6" style="margin: auto; float: none;">
 			<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
 						<div class="input-group">
 
-							<input id="domain" class="form-control busca-roanja" type="text" placeholder="Escribe tu dominio" name="domain" value="{$val}"/>
+							<input id="domain" class="form-control busca-roanja" type="text" placeholder="{l s='Write here your domain' mod='roanjacheckdomain'}" name="domain" value="{$val}"/>
 						  <div class="input-group-btn">
 						  <button class="btn-roanja" type="submit">
 						  		<span><i class="fa fa-search font-roanja"></i></span> </button>
