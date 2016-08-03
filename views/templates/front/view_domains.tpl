@@ -4,7 +4,6 @@
 {addJsDefL name=taken}{l s='taken' js=1 mod='roanjacheckdomain'}{/addJsDefL}
 {addJsDefL name=add}{l s='add' js=1 mod='roanjacheckdomain'}{/addJsDefL}
 {addJsDefL name=added}{l s='added' js=1 mod='roanjacheckdomain'}{/addJsDefL}
-
 <div id="dimmer"></div>
 <div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}">
 		<div class="domain-result hide">

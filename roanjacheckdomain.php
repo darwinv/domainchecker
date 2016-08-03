@@ -287,6 +287,12 @@ protected function renderForm()
         $this->context->controller->addCSS($this->_path.'/css/roanjacheckdomain.css');
     }
 
+public function hookdisplayTopColumn()
+{
+  $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
+
+   return $this->display(__FILE__, 'form_domain_2.tpl', $this->getCacheId());
+}
 
     public function getActivesTld(){
                  if ($results = Db::getInstance()->ExecuteS('
@@ -342,7 +348,7 @@ public function updateCart($idproducto)
 {
     //$this->product = new Product($idproducto, false,$this->context->language->id);
    //$val=$this->context->cart->updateQty(1, $idproducto);
-    return array("result"=>true);
+    return array("result"=>t);
 
 }
 

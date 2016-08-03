@@ -85,7 +85,7 @@ $(this).addClass("disabled");
          success:function(data){
          if(data.result){
 
-   $('#append-dominio').append('<span class="cartdomains" title="eliminar"  data-id='+id_producto+' > <span data-nombre='+nombrecomp+'> <i class="fa fa-times-circle" aria-hidden="true"></i> </span>'+nombre+'</span>');
+   $('#append-dominio').append('<span class="cartdomains" title="eliminar"  data-id='+id_producto+' > <span class="" data-nombre='+nombrecomp+'> <i class="fa fa-times-circle" aria-hidden="true"></i> </span>'+nombre+'</span>');
          }
             }
         })
@@ -96,8 +96,12 @@ $(document).on('click','.cartdomains > span',function(e){
 	var nombredominio=$(this).data('nombre');
 $('.nomb_'+nombredominio).removeClass('disabled');
 console.log($('.nomb_'+nombredominio));
+
 $('.nomb_'+nombredominio).html("<i class='fa fa-shopping-cart fa-2x '></i>"+add);
 //var val=$(this).parent('span');
+var productId=$('.cartdomains').data('id');
+//alert(productId);
+ajaxCart.remove(productId);
 $(this).parent('span').remove();
 
 
