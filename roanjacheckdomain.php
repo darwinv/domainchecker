@@ -122,7 +122,9 @@ protected function renderForm()
         $this->updateTld("info",Tools::getValue('dominio_info_on'));
         $this->updateTld("edu",Tools::getValue('dominio_edu_on'));
         $this->updateTld("es",Tools::getValue('dominio_es_on'));
-
+        $this->updateTld("com.ve",Tools::getValue('dominio_comve_on'));
+        $this->updateTld("org.ve",Tools::getValue('dominio_orgve_on'));
+        $this->updateTld("net.ve",Tools::getValue('dominio_netve_on'));
         //echo $form_values["ROANJA_CHECKDOMAIN_NAME"];
     }
 
@@ -141,7 +143,10 @@ protected function renderForm()
             'dominio_org_on'=>isset($vals[2]['active'])?$vals[2]['active']:1,
             'dominio_edu_on'=>isset($vals[3]['active'])?$vals[3]['active']:0,
             'dominio_info_on'=>isset($vals[4]['active'])?$vals[4]['active']:0,
-            'dominio_es_on'=>isset($vals[5]['active'])?$vals[5]['active']:0
+            'dominio_es_on'=>isset($vals[5]['active'])?$vals[5]['active']:0,
+            'dominio_comve_on'=>isset($vals[6]['active'])?$vals[6]['active']:0,
+            'dominio_orgve_on'=>isset($vals[7]['active'])?$vals[7]['active']:0,
+            'dominio_netve_on'=>isset($vals[8]['active'])?$vals[8]['active']:0
         );
     }
 
@@ -241,6 +246,54 @@ protected function renderForm()
                         'name' => 'name'
                     )
                 ),
+
+                array(
+                   'type' => 'checkbox',
+                   'name' => 'dominio_comve',
+                   'label' => $this->l('Enable .com.ve'),
+                   'values' => array(
+                       'query' => array(
+                           array(
+                               'id' => 'on',
+                               'val' => '1'
+                           ),
+                       ),
+                       'id' => 'id',
+                       'name' => 'name'
+                   )
+               ),
+
+               array(
+                  'type' => 'checkbox',
+                  'name' => 'dominio_orgve',
+                  'label' => $this->l('Enable .org.ve'),
+                  'values' => array(
+                      'query' => array(
+                          array(
+                              'id' => 'on',
+                              'val' => '1'
+                          ),
+                      ),
+                      'id' => 'id',
+                      'name' => 'name'
+                  )
+              ),
+
+              array(
+                 'type' => 'checkbox',
+                 'name' => 'dominio_netve',
+                 'label' => $this->l('Enable .net.ve'),
+                 'values' => array(
+                     'query' => array(
+                         array(
+                             'id' => 'on',
+                             'val' => '1'
+                         ),
+                     ),
+                     'id' => 'id',
+                     'name' => 'name'
+                 )
+             ),
 
                  array(
                     'type' => 'checkbox',
@@ -412,6 +465,21 @@ public function getDataTldProduct($tld){
             'name_tld' => 'es',
             'active' => 0,
              ));
+
+             $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+          'name_tld' => 'com.ve',
+          'active' => 0,
+           ));
+
+           $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+        'name_tld' => 'org.ve',
+        'active' => 0,
+         ));
+
+         $res &= Db::getInstance()->insert('rj_checkdomain_tlds', array(
+      'name_tld' => 'net.ve',
+      'active' => 0,
+       ));
 //echo $getMsgError();
            return $res;
 

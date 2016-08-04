@@ -1287,6 +1287,18 @@
     "server": "whois.nic.ve",
     "not_found": "No match for"
   },
+  "com.ve": {
+    "server": "whois.nic.ve",
+    "not_found": "No match for"
+  },
+  "net.ve": {
+    "server": "whois.nic.ve",
+    "not_found": "No match for"
+  },
+  "org.ve": {
+    "server": "whois.nic.ve",
+    "not_found": "No match for"
+  },
   "vegas": {
     "server": "whois.afilias-srs.net",
     "not_found": "NOT FOUND"
