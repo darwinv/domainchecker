@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('.foot-checkdomain').hide();
 getDomains();
 
 $(document).on('submit', '#form-domain', function(e) {
@@ -75,6 +76,7 @@ $.ajax({
 
 
 $(document).on('click', '.choose-domain', function(e) {
+		$('.foot-checkdomain').show(500);
   var ruta=$('#form-domain').data("ruta");
   var id_producto = $(this).data('dominio');
 	var nombre=$(this).data('nombre').split(".");
@@ -104,6 +106,8 @@ $(this).addClass("disabled");
 $(document).on('click','.cartdomains > span',function(e){
 	var nombredominio=$(this).data('nombre');
 $('.nomb_'+nombredominio).removeClass('disabled');
+
+
 console.log($('.nomb_'+nombredominio));
 
 $('.nomb_'+nombredominio).html("<i class='fa fa-shopping-cart fa-2x '></i>"+add);
@@ -113,7 +117,9 @@ var productId=$('.cartdomains').data('id');
 ajaxCart.remove(productId);
 $(this).parent('span').remove();
 
-
+if(!$('.choose-domain').hasClass('disabled')){
+	$('.foot-checkdomain').hide(1000);
+}
 });
 
 

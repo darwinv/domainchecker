@@ -44,6 +44,7 @@ class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontContro
 	$this->context->smarty->assign('product',Configuration::get('PS_CATALOG_MODE'));
   $this->context->smarty->assign('nombre_check_domain',Configuration::get('ROANJA_CHECKDOMAIN_NAME'));
   $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
+	$this->context->smarty->assign('order_process',Configuration::get('PS_ORDER_PROCESS_TYPE') ? 'order-opc' : 'order');
   $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
 		$this->setTemplate('view_domains.tpl');
 	  }

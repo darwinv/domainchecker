@@ -28,13 +28,37 @@
 				</table>
 			</div>
 				<div class="foot-checkdomain text-center">
-					<h2 class="text-center" style="margin-top:3%; margin-bottom:3%;" >{l s='Selected Domains' mod='roanjacheckdomain'} </h2>
-						<div id="append-dominio"> </div>
+					<!-- <h2 class="text-center" style="margin-top:3%; margin-bottom:3%;" >{l s='Selected Domains' mod='roanjacheckdomain'} </h2> -->
 
-						<span id="num-domains" class="select-domains hide" >0</span><span class="select-domains hide"> {l s='Selected Domains' mod='roanjacheckdomain'} </span>
-					<div>
-						<button disabled class='btn btn-primary send-choose-domain'>{l s='Process' mod='roanjacheckdomain'}<i class='fa fa-shopping-cart fa-2x'></i></button>
-					</div>
+
+						<!-- <span id="num-domains" class="select-domains hide" >0</span><span class="select-domains hide"> {l s='Selected Domains' mod='roanjacheckdomain'} </span>
+<div class="row text-center "> -->
+	<h2>{l s='¿Que deseas hacer con tus Dominios?' mod='roanjacheckdomain'} </h2>
+				<div id="append-dominio"> </div>
+
+
+<div class="row">
+  <div class="col-lg-4">
+<a href="{$link->getPageLink("$order_process", true)|escape:"html":"UTF-8"}" class="btn btn-primary" >
+	{l s='Proceed to checkout' mod='blockcart'}
+</a>
+	</div>
+
+  <div class="col-lg-4">
+				<a href="/prestaroanja/?id_appagebuilder_profiles=23"  class="btn btn-primary">
+					{l s='Ver planes de hosting' mod='roanjacheckdomain'}
+				</a>
+  </div>
+
+<div class="col-lg-4">
+		<a href="/prestaroanja/?id_appagebuilder_profiles=24" class="btn btn-primary" >
+			{l s='Ver Paquetes especializados' mod='roanjacheckdomain'}
+</a>
+	</div>
+</div>
+</div>
+
+
 				</div>
 		</div>
 
