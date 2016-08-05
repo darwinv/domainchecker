@@ -40,7 +40,7 @@
 <div class="row">
   <div class="col-lg-4">
 <a href="{$link->getPageLink("$order_process", true)|escape:"html":"UTF-8"}" class="btn btn-primary" >
-	{l s='Proceed to checkout' mod='blockcart'}
+	{l s='Proceed to checkout' mod='roanjacheckdomain'}
 </a>
 	</div>
 
