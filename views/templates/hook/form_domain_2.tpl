@@ -29,14 +29,15 @@
 {assign var="val" value=""}
 {/if}
 <!-- <div class="rj-background"> -->
-<div class="container cont-checkdomain">
-	<div class="row text-center container-form-domain"> <!-- -->
-		<div class="col-xs-12 col-lg-12">
-				<div class="row">
-					<div class="form-group col-xs-6 col-lg-6" style="margin: auto; float: none;">
-					</div>
-				</div>
-		<div class="form-group col-xs-9 col-sm-11 col-md-5 col-lg-6" style="margin: auto; float: none;">
+<div style="padding: 4% 0% 0% 5%;" class="cont-checkdomain">
+	<div class="row container-form-domain" style="border-bottom: 2px solid rgb(204, 204, 204); padding-bottom: 10px; margin-right: 22px;"> <!-- -->
+		<div class="form-group col-xs-9 col-sm-11 col-md-8 col-lg-8" style="margin: auto;">
+			<h3 style="text-transform: none;">{l s='Cámbiate a ROANJA - ¡Es así de fácil!' mod='roanjacheckdomain'}</h3>                            
+			<p style="font-size: inherit; color: rgb(102, 102, 102); margin-bottom: 3%; font-family: inherit;">
+			<i class="fa fa-check">&nbsp;&nbsp;&nbsp;</i>{l s='Cambio seguro y facil sin esfuerzo' mod='roanjacheckdomain'}</p>                            
+			<p style="margin-bottom: 5%; font-size: inherit; color: rgb(102, 102, 102); font-family: inherit;">
+			<i class="fa fa-check">&nbsp;&nbsp;&nbsp;</i>{l s='Soporte profesional por teléfono, e-mail e internet' mod='roanjacheckdomain'}</p>
+
 			<form  id="form-domain" data-ruta="{$modules_dir}" action="{$link->getModuleLink('roanjacheckdomain','pagedomain')}" method="POST">
 						<div class="input-group">
 
@@ -48,7 +49,9 @@
 						</div>
 				</form>
 			</div>
-		</div>
+			<div class="col-lg-4 col-md-4">              
+            <img src="{$base_dir}img/img-dominios/domain_web.jpg" style="width: 100%;">            
+			</div>
 	</div>
 </div>
 <!-- </div> -->
