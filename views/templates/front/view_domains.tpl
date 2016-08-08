@@ -5,6 +5,7 @@
 {addJsDefL name=add}{l s='add' js=1 mod='roanjacheckdomain'}{/addJsDefL}
 {addJsDefL name=added}{l s='added' js=1 mod='roanjacheckdomain'}{/addJsDefL}
 <div id="dimmer"></div>
+
 <div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}">
 		<div class="domain-result hide">
 			<br>
@@ -27,6 +28,7 @@
 					</tbody>
 				</table>
 			</div>
+
 				<div class="foot-checkdomain text-center">
 					<!-- <h2 class="text-center" style="margin-top:3%; margin-bottom:3%;" >{l s='Selected Domains' mod='roanjacheckdomain'} </h2> -->
 
@@ -39,19 +41,22 @@
 
 <div class="row">
   <div class="col-lg-4">
+<img style="margin-bottom:4%" src={"$base_dir/modules/roanjacheckdomain/img/caja.jpg"} alt="">
 <a href="{$link->getPageLink("$order_process", true)|escape:"html":"UTF-8"}" class="btn btn-primary" >
 	{l s='Proceed to checkout' mod='roanjacheckdomain'}
 </a>
 	</div>
 
   <div class="col-lg-4">
-				<a href="/prestaroanja/?id_appagebuilder_profiles=23"  class="btn btn-primary">
+		<img style="margin-bottom:4%" src={"$base_dir/modules/roanjacheckdomain/img/hosting.jpg"} alt="">
+				<a href={"$base_dir?id_appagebuilder_profiles=23"}  class="btn btn-primary">
 					{l s='Ver planes de hosting' mod='roanjacheckdomain'}
 				</a>
   </div>
 
 <div class="col-lg-4">
-		<a href="/prestaroanja/?id_appagebuilder_profiles=24" class="btn btn-primary" >
+	<img style="margin-bottom:4%" src={"$base_dir/modules/roanjacheckdomain/img/paquetes.jpg"} alt="">
+		<a href={"$base_dir?id_appagebuilder_profiles=24"} class="btn btn-primary" >
 			{l s='Ver Paquetes especializados' mod='roanjacheckdomain'}
 </a>
 	</div>

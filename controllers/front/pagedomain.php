@@ -46,6 +46,7 @@ class RoanjaCheckDomainPageDomainModuleFrontController extends ModuleFrontContro
   $this->context->smarty->assign('ruta_img', $this->module->getLocalPath().'reload.gif');
 	$this->context->smarty->assign('order_process',Configuration::get('PS_ORDER_PROCESS_TYPE') ? 'order-opc' : 'order');
   $this->context->smarty->assign('ruta_modulo', $this->module->getLocalPath());
+
 		$this->setTemplate('view_domains.tpl');
 	  }
 
