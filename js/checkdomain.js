@@ -79,18 +79,20 @@ $(document).on('click', '.choose-domain', function(e) {
 		$('.foot-checkdomain').show(500);
   var ruta=$('#form-domain').data("ruta");
   var id_producto = $(this).data('dominio');
+	var dominiocompleto=$(this).data('nombre');
 	var nombre=$(this).data('nombre').split(".");
 
 	var tld=$(this).data('tld');
 	var nombrecomp=nombre[0]+"-"+tld;
   var envproducto="producto="+id_producto;
+	var envdominiocompleto="&dominio="+dominiocompleto;
 
  $(this).html(" <i class='fa fa-check-square-o fa-2x '></i>"+added);
 
 $(this).addClass("disabled");
   $.ajax({
           url:ruta+"roanjacheckdomain/ajax_checkdomain.php",
-          data:envproducto+"&action=setCartDomain",
+          data:envproducto+"&action=setCartDomain"+envdominiocompleto,
           type:"POST",
           dataType:"json",
          success:function(data){

@@ -33,23 +33,21 @@ $RoanjaCheckDomain=new Roanjacheckdomain ();
 if(Tools::getValue('action') =='getDomains' && Tools::getValue('domain')) {
 
      $dominio =Tools::getValue('domain');
-
      // $result=$RoanjaCheckDomain->searchDomain($dominio);
      $result=$RoanjaCheckDomain->searchDomainNew($dominio);
 
      echo json_encode($result);
 
-      
 }
 
 if(Tools::getValue('action') =='setCartDomain' && Tools::getValue('producto')) {
-    
-	$result=$RoanjaCheckDomain->updateCart(Tools::getValue('producto'));
+
+	$result=$RoanjaCheckDomain->setCookieDominio(Tools::getValue('producto'),Tools::getValue('dominio'));
       echo json_encode($result);
      // $result=$RoanjaCheckDomain->searchDomain($dominio);
-     
 
-     
 
-      
+
+
+
 }

@@ -7,7 +7,7 @@
 <div id="dimmer"></div>
 
 <div id="domaindec" class="cont-checkdomain" data-domain="{$smarty.post.domain}">
-		<div class="domain-result hide">
+		<div class="domain-result hide" style="margin:3%">
 			<br>
 			<br>
 			<hr>

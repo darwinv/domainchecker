@@ -398,8 +398,18 @@ $arrdata[$i]["url_cart"]=$this->context->link->getPageLink('cart',false,NULL,'ad
         }
 
 
-public function updateCart($idproducto)
+public function setCookieDominio($idproducto,$dominio)
 {
+
+  if(!isset($_COOKIE['dominios'])){
+      $array_dominios = array();
+      $array_dominios[]=$dominio;
+    }else{
+        $array_dominios=unserialize($_COOKIE['dominios']);
+      $array_dominios[]=$dominio;
+    }
+
+    setcookie('dominios', serialize($array_dominios), time()+3600*24*30,'/');
     //$this->product = new Product($idproducto, false,$this->context->language->id);
    //$val=$this->context->cart->updateQty(1, $idproducto);
     return array("result"=>t);
