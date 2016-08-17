@@ -412,14 +412,38 @@ public function setCookieDominio($idproducto,$dominio)
     setcookie('dominios', serialize($array_dominios), time()+3600*24*30,'/');
     //$this->product = new Product($idproducto, false,$this->context->language->id);
    //$val=$this->context->cart->updateQty(1, $idproducto);
-    return array("result"=>t);
+    return array("result"=>$array_dominios);
 
 }
 
-public function deleteProductCart($idproducto){
+public function deleteDominioCookie($dominio)
+{
 
+  $lista_dominios=unserialize($_COOKIE['dominios']);
+  // foreach ($lista_dominios as $key => $value) {
+  //   if($value[$field]==$dominio){
+  //             unset($lista_dominios[$key]);
+  //         }
+  // }
+
+for ($i=0; $i<count($lista_dominios); $i++) {
+  if($lista_dominios[$i]==$dominio){
+       unset($lista_dominios[$i]);
+    }
+}
+
+  if(!empty($lista_dominios)){
+     setcookie('dominios', serialize($lista_dominios), time()+3600*24*30,'/');
+   }else {
+     setcookie('dominios', serialize($lista_dominios), time()-3600,'/');
+   }
+
+    //$this->product = new Product($idproducto, false,$this->context->language->id);
+   //$val=$this->context->cart->updateQty(1, $idproducto);
+    return array("result"=>$lista_dominios);
 
 }
+
 
 public function getDataTldProduct($tld){
 

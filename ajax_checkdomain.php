@@ -46,8 +46,13 @@ if(Tools::getValue('action') =='setCartDomain' && Tools::getValue('producto')) {
       echo json_encode($result);
      // $result=$RoanjaCheckDomain->searchDomain($dominio);
 
+}
 
 
+if(Tools::getValue('action') =='deleteDomainCookie') {
 
+	$result=$RoanjaCheckDomain->deleteDominioCookie(Tools::getValue('dominio'));
+      echo json_encode($result);
+     // $result=$RoanjaCheckDomain->searchDomain($dominio);
 
 }

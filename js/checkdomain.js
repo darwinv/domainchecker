@@ -97,26 +97,44 @@ $(this).addClass("disabled");
           dataType:"json",
          success:function(data){
          if(data.result){
-
-   $('#append-dominio').append('<span class="cartdomains" title="eliminar"  data-id='+id_producto+' > <span class="" data-nombre='+nombrecomp+'> <i class="fa fa-times-circle" aria-hidden="true"></i> </span>'+nombre+'</span>');
+console.log(data.result);
+   $('#append-dominio').append('<span class="cartdomains" title="eliminar"  data-id='+id_producto+' > <span class="" data-dominio='+dominiocompleto+' data-nombre='+nombrecomp+'> <i class="fa fa-times-circle" aria-hidden="true"></i> </span>'+nombre+'</span>');
          }
             }
         })
 
   });
 
+
+//Borrar dominio del carrito y cookie
 $(document).on('click','.cartdomains > span',function(e){
+	  var ruta=$('#form-domain').data("ruta");
 	var nombredominio=$(this).data('nombre');
+	var dominio=$(this).data('dominio');
 $('.nomb_'+nombredominio).removeClass('disabled');
 
+	var envdominiocompleto="&dominio="+dominio;
 
-console.log($('.nomb_'+nombredominio));
 
 $('.nomb_'+nombredominio).html("<i class='fa fa-shopping-cart fa-2x '></i>"+add);
 //var val=$(this).parent('span');
 var productId=$('.cartdomains').data('id');
 //alert(productId);
 ajaxCart.remove(productId);
+
+$.ajax({
+				url:ruta+"roanjacheckdomain/ajax_checkdomain.php",
+				data:"action=deleteDomainCookie"+envdominiocompleto,
+				type:"POST",
+				dataType:"json",
+			 success:function(data){
+			 if(data.result){
+				 console.log(data.result);
+			 }
+					}
+			})
+
+
 $(this).parent('span').remove();
 
 if(!$('.choose-domain').hasClass('disabled')){
