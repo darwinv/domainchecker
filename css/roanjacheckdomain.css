@@ -25,6 +25,7 @@ div.cont-checkdomain{
 
 div.cont-checkdomain .table tbody > tr > td {
     text-align: center;
+    padding: 1%;
 }
 
 div.cont-checkdomain .action {
@@ -120,7 +121,7 @@ font-size: 17px !important;
 }
 .choose-domain:hover{
     width:42%;
-    background: #ff9933;
+    background: rgba(83, 137, 51, 0.89);
     border: 0px;
 }
 
@@ -161,6 +162,7 @@ border-radius: 9px 9px 9px 9px;
 
 .button.ajax_add_to_cart_button.choose-domain.btn.btn-default.disabled {
     color: white;
+    float: inherit;
     background-color: rgba(0, 0, 0, 0.4);
 
   }
