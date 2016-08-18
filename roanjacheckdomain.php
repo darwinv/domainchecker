@@ -420,11 +420,6 @@ public function deleteDominioCookie($dominio)
 {
 
   $lista_dominios=unserialize($_COOKIE['dominios']);
-  // foreach ($lista_dominios as $key => $value) {
-  //   if($value[$field]==$dominio){
-  //             unset($lista_dominios[$key]);
-  //         }
-  // }
 
 for ($i=0; $i<count($lista_dominios); $i++) {
   if($lista_dominios[$i]==$dominio){

@@ -28,7 +28,6 @@
 					</tbody>
 				</table>
 			</div>
-
 				<div class="foot-checkdomain text-center">
 					<!-- <h2 class="text-center" style="margin-top:3%; margin-bottom:3%;" >{l s='Selected Domains' mod='roanjacheckdomain'} </h2> -->
 
